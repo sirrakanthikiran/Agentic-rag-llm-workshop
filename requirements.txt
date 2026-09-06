@@ -1,0 +1,15 @@
+# Core workshop dependencies.
+# Version floors are set deliberately: google-genai is the CURRENT SDK.
+# Do NOT use the deprecated google-generativeai package — most 2023-24
+# tutorials use it and their code will not run here.
+
+google-genai>=1.0.0
+sentence-transformers>=3.0.0
+numpy>=1.26.0
+
+# Notebook support (already present in Codespaces, needed for local installs)
+jupyter>=1.0.0
+ipykernel>=6.29.0
+
+# Backup provider only — used if Gemini is rate-limited on the day
+openai>=1.40.0
