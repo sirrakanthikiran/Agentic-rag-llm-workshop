@@ -28,14 +28,29 @@ stuck, open it rather than falling behind.
 
 ---
 
+## What we'll cover
+
+| Part | Topic | What you'll build |
+|---|---|---|
+| 1 | Your first LLM call | A working API call in three lines |
+| 2 | Prompting | System instructions, temperature, JSON output |
+| 3 | Multi-turn chat | A conversation that remembers |
+| 4 | RAG from scratch | Retrieval over your own documents, in numpy |
+| 5 | Agents | A model that calls your Python functions |
+
+No prior experience with AI or Python is required. Everything either runs as-is or
+has a clearly marked `TODO` for you to fill in.
+
+---
+
 ## What's in here
 
 | File | What it is |
 |---|---|
-| `workshop.ipynb` | The participant notebook, with `TODO` gaps to fill in |
+| `workshop.ipynb` | The notebook you'll work in, with `TODO` gaps |
 | `solutions.ipynb` | Identical, with every TODO completed |
-| `requirements.txt` | Pinned dependencies |
-| `.devcontainer/` | Auto-configures Codespaces, pre-downloads the embedding model |
+| `requirements.txt` | The Python packages we use |
+| `.devcontainer/` | Configures Codespaces automatically — you can ignore this |
 
 ---
 
@@ -51,46 +66,25 @@ jupyter notebook
 
 ---
 
-## Instructor notes
-
-### Run of show (120 min)
-
-| Time | Segment | Notes |
-|---|---|---|
-| 0:00–0:10 | Setup check | **Gate.** Nobody moves on until every screen shows `Setup OK`. Pair people up now. |
-| 0:10–0:20 | First API call | Talk light. Get them running code fast. |
-| 0:20–0:40 | Prompting | System instruction, temperature, JSON output. First TODOs. |
-| 0:40–0:45 | Break / buffer | |
-| 0:45–1:00 | Multi-turn chat | The "no memory" demo lands well — run it live. |
-| 1:00–1:35 | RAG from scratch | The core. Don't rush the embeddings intuition. |
-| 1:35–1:40 | Break / buffer | |
-| 1:40–2:05 | Agent with tools | The `4738 * 2913` failure → tool fix is the money moment. |
-| 2:05–2:15 | Wrap-up + Q&A | |
-
-### Setup and delivery
-
-- **Pair programming.** Assign pairs at 0:05. A broken laptop then costs you one
-  person's screen, not one person's participation.
-- **Every participant uses their own API key.** Free-tier limits count per account,
-  so a shared key will rate-limit the entire room at once.
-- **Stagger the heavy cells.** If 30 people hit the API in the same 5 seconds you'll
-  see 429s. Ask half the room to start, then the other half.
-- **Keep a spare Codespace open** on your own account that a stuck participant can
-  be invited into.
-
-### Known failure modes
+## Troubleshooting
 
 | Problem | Fix |
 |---|---|
-| `429 RESOURCE_EXHAUSTED` | Wait 60s, or switch to Groq (appendix cell in the notebook) |
-| Someone pasted the key with quotes/spaces | Re-paste between the existing quotes only |
-| Codespace won't build | Fall back to local install, or share your Codespace |
-| Venue wifi dies | Pre-download `ollama pull llama3.2:3b` (~2 GB) on your machine and demo from the front |
-| Model name errors | We use `gemini-2.5-flash`. Older tutorials reference retired models. |
-| `import google.generativeai` | That's the deprecated SDK. This repo uses `from google import genai`. |
+| `429 RESOURCE_EXHAUSTED` | You've hit the free-tier limit. Wait 60 seconds and re-run, or switch to Groq using the appendix cell at the end of the notebook. |
+| `API key not valid` | Re-paste the key between the existing quotes only — no extra quotes or spaces. |
+| Codespace won't build | Try creating a fresh one. If it still fails, ask the instructor to share theirs. |
+| `ModuleNotFoundError` | Re-run the first cell (the `%pip install` one) and wait for it to finish. |
+| Model name errors | This repo uses `gemini-2.5-flash`. Older tutorials online reference retired models. |
+| `import google.generativeai` errors | That's the deprecated SDK. This repo uses `from google import genai`. |
 
-### Verify before the day
+---
 
-Model IDs and free-tier limits change often. The week before, run
-`solutions.ipynb` end to end on a **fresh** account to confirm `gemini-2.5-flash`
-is still current and the free tier still covers the session.
+## Where to go next
+
+- [Hugging Face Agents Course](https://huggingface.co/learn/agents-course) — free, hands-on, Apache-2.0
+- [Gemini API docs](https://ai.google.dev/gemini-api/docs)
+- LangChain, LlamaIndex, smolagents and PydanticAI are the frameworks worth
+  learning once you understand what we build here by hand.
+
+**One safety note:** free-tier prompts may be used to improve the provider's models.
+Never paste customer data, credentials or anything confidential into a free-tier API.
